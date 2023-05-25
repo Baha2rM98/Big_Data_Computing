@@ -108,7 +108,8 @@ class TriangleCounting:
             b = random.randint(0, p - 1)
 
             pairs = edges.flatMap(
-                lambda x: [((tuple(sorted([(((a * x[0] + b) % p) % self.C), (((a * x[1] + b) % p) % self.C), i]))), x) for i
+                lambda x: [((tuple(sorted([(((a * x[0] + b) % p) % self.C), (((a * x[1] + b) % p) % self.C), i]))), x)
+                           for i
                            in range(self.C)])
             t_count = pairs.groupByKey().map(lambda x: self.countTriangles2(x[0], list(x[1]), a, b, p, self.C)).reduce(
                 lambda x, y: x + y)
@@ -117,8 +118,8 @@ class TriangleCounting:
 
         return t_final[self.R - 1]
 
-def main():
 
+def main():
     assert len(sys.argv) == 5, "Usage: python G072HW2.py <C> <R> <flag> <dataset file>"
 
     conf = SparkConf().setAppName('Triangle Counting')
